@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountService {
@@ -54,6 +55,48 @@ public class AccountService {
             account.setCustomerId(updateAccountRequest.getCustomerId());
 
             accountRepository.save(account);
+        });
+
+        return accountOptional.map(accountDtoConverter::convert).orElse(new AccountDto());
+    }
+
+    public List<AccountDto> getAllAccounts(){
+        List<Account> accountList = accountRepository.findAll();
+
+        return accountList.stream().map(accountDtoConverter::convert).collect(Collectors.toList());
+    }
+
+    public AccountDto getAccountById(String id){
+        return accountRepository.findById(id)
+                .map(accountDtoConverter::convert).orElse(new AccountDto());
+    }
+
+    public void deleteAccountById(String id){
+        accountRepository.deleteById(id);
+    }
+
+    public AccountDto withDrawMoney(String id, Double amount){
+        Optional<Account> accountOptional = accountRepository.findById(id);
+        accountOptional.ifPresent(account -> {
+            if(account.getBalance() > amount){
+                account.setBalance(account.getBalance() - amount);
+                System.out.println("You took " + amount + account.getCurrency() + " from the bank");
+                accountRepository.save(account);
+            }else{
+                System.out.println("Insufficent funds -> " +
+                        "accoundId: " + id + " balance: " + account.getBalance() + " amount " + amount + account.getCurrency() );
+            }
+        });
+
+        return accountOptional.map(accountDtoConverter::convert).orElse(new AccountDto());
+    }
+
+    public AccountDto addMoney(String id, Double amount){
+        Optional<Account> accountOptional = accountRepository.findById(id);
+        accountOptional.ifPresent(account -> {
+                account.setBalance(account.getBalance() + amount);
+                System.out.println("You added " + amount + " $ to the bank");
+                accountRepository.save(account);
         });
 
         return accountOptional.map(accountDtoConverter::convert).orElse(new AccountDto());
