@@ -1,9 +1,6 @@
 package com.bankapp;
 
-import com.bankapp.model.Account;
-import com.bankapp.model.City;
-import com.bankapp.model.Currency;
-import com.bankapp.model.Customer;
+import com.bankapp.model.*;
 import com.bankapp.repository.AccountRepository;
 import com.bankapp.repository.CustomerRepository;
 import com.bankapp.service.AccountService;
@@ -35,7 +32,11 @@ public class BankAppApplication implements CommandLineRunner {
                 .id("123")
                 .name("Beytullah")
                 .city(City.SAMSUN)
-                .address("Atakum")
+                .address(Address.builder()
+                        .city(City.ISTANBUL)
+                        .postCode("34")
+                        .addressDetails("Besiktas")
+                        .build())
                 .dateOfBirth(1998)
                 .build();
 
@@ -43,7 +44,11 @@ public class BankAppApplication implements CommandLineRunner {
                 .id("1234")
                 .name("Merve")
                 .city(City.ISTANBUL)
-                .address("Besiktas")
+                .address(Address.builder()
+                        .city(City.ISTANBUL)
+                        .postCode("34")
+                        .addressDetails("Kadikoy")
+                        .build())
                 .dateOfBirth(1997)
                 .build();
 
@@ -51,7 +56,11 @@ public class BankAppApplication implements CommandLineRunner {
                 .id("12345")
                 .name("Furkan")
                 .city(City.ANKARA)
-                .address("Cankaya")
+                .address(Address.builder()
+                        .city(City.ANKARA)
+                        .postCode("06")
+                        .addressDetails("Cankaya")
+                        .build())
                 .dateOfBirth(2000)
                 .build();
 

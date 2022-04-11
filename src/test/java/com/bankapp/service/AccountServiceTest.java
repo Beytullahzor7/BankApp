@@ -3,10 +3,7 @@ package com.bankapp.service;
 import com.bankapp.dto.AccountDto;
 import com.bankapp.dto.AccountDtoConverter;
 import com.bankapp.dto.CreateAccountRequest;
-import com.bankapp.model.Account;
-import com.bankapp.model.City;
-import com.bankapp.model.Currency;
-import com.bankapp.model.Customer;
+import com.bankapp.model.*;
 import com.bankapp.repository.AccountRepository;
 import org.junit.Assert;
 import org.junit.Before;
@@ -41,8 +38,12 @@ public class AccountServiceTest {
 
         Customer customer = Customer.builder()
                 .id("12345")
-                .address("Bornova")
-                .city(City.IZMIR)
+                .address(Address.builder()
+                        .city(City.ISTANBUL)
+                        .postCode("34")
+                        .addressDetails("Besiktas")
+                        .build())
+                .city(City.ISTANBUL)
                 .dateOfBirth(1998)
                 .name("Beytullah")
                 .build();

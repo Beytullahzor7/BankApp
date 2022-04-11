@@ -79,6 +79,7 @@ public class AccountService {
 
     public AccountDto withDrawMoney(String id, Double amount){
         Optional<Account> accountOptional = accountRepository.findById(id);
+
         accountOptional.ifPresent(account -> {
             if(account.getBalance() > amount){
                 account.setBalance(account.getBalance() - amount);
@@ -95,9 +96,10 @@ public class AccountService {
 
     public AccountDto addMoney(String id, Double amount){
         Optional<Account> accountOptional = accountRepository.findById(id);
+
         accountOptional.ifPresent(account -> {
                 account.setBalance(account.getBalance() + amount);
-                System.out.println("You added " + amount + " $ to the bank");
+                System.out.println("You added " + amount + account.getCurrency() + " to the bank");
                 accountRepository.save(account);
         });
 

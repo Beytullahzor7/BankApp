@@ -2,15 +2,16 @@ package com.bankapp.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
+@Entity
+@Table(name = "customer")
 public class Customer {
 
     @Id
@@ -18,5 +19,8 @@ public class Customer {
     private String name;
     private Integer dateOfBirth;
     private City city;
-    private String address;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
 }

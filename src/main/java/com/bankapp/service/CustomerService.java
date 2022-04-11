@@ -27,7 +27,7 @@ public class CustomerService {
     public CustomerDto createCustomer(CreateCustomerRequest customerRequest){
         Customer customer = new Customer();
         customer.setId(customerRequest.getId());
-        customer.setAddress(customerRequest.getAddress());
+        //customer.setAddress(customerRequest.getAddress());
         customer.setName(customerRequest.getName());
         customer.setDateOfBirth(customerRequest.getDateOfBirth());
         customer.setCity(City.valueOf(customerRequest.getCity().name()));
@@ -64,7 +64,7 @@ public class CustomerService {
             customer.setName(updateCustomerRequest.getName());
             customer.setCity(City.valueOf(updateCustomerRequest.getCity().name()));
             customer.setDateOfBirth(updateCustomerRequest.getDateOfBirth());
-            customer.setAddress(updateCustomerRequest.getAddress());
+            //customer.setAddress(updateCustomerRequest.getAddress());
             customerRepository.save(customer);
         });
 
