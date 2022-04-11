@@ -4,6 +4,7 @@ import com.bankapp.dto.AccountDto;
 import com.bankapp.dto.AccountDtoConverter;
 import com.bankapp.dto.CreateAccountRequest;
 import com.bankapp.dto.UpdateAccountRequest;
+import com.bankapp.exception.CustomerNotFoundException;
 import com.bankapp.model.Account;
 import com.bankapp.model.Customer;
 import com.bankapp.repository.AccountRepository;
@@ -28,8 +29,9 @@ public class AccountService {
 
     public AccountDto createAccount(CreateAccountRequest createAccountRequest){
         Customer customer = customerService.getCustomerById(createAccountRequest.getCustomerId());
+
         if(customer.getId() == null || customer.getId().trim().equals(""))
-            throw new RuntimeException("Customer Not Found With Id: " + createAccountRequest.getCustomerId());
+            throw new CustomerNotFoundException("Customer Not Found With Id: " + createAccountRequest.getCustomerId());
 
         Account account = Account.builder()
                 .id(createAccountRequest.getId())
@@ -45,7 +47,7 @@ public class AccountService {
     public AccountDto updateAccount(String id, UpdateAccountRequest updateAccountRequest){
         Customer customer = customerService.getCustomerById(updateAccountRequest.getCustomerId());
         if(customer.getId() == null || customer.getId().equals(""))
-            throw new RuntimeException("Customer Not Found With Id: " + updateAccountRequest.getCustomerId());
+            throw new CustomerNotFoundException("Customer Not Found With Id: " + updateAccountRequest.getCustomerId());
 
         Optional<Account> accountOptional = accountRepository.findById(id);
         accountOptional.ifPresent(account -> {

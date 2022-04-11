@@ -13,8 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.*;
-
 public class AccountServiceTest {
 
     private AccountService accountService;
@@ -22,8 +20,6 @@ public class AccountServiceTest {
     private AccountRepository accountRepository;
     private CustomerService customerService;
     private AccountDtoConverter accountDtoConverter;
-
-
 
     @Before
     public void setUp() throws Exception {
