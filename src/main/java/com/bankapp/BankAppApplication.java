@@ -3,8 +3,6 @@ package com.bankapp;
 import com.bankapp.model.*;
 import com.bankapp.repository.AccountRepository;
 import com.bankapp.repository.CustomerRepository;
-import com.bankapp.service.AccountService;
-import com.bankapp.service.CustomerService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

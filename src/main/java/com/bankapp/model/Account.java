@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Getter
 @Setter
@@ -14,7 +13,6 @@ import javax.persistence.Table;
 @EqualsAndHashCode
 
 @Entity
-@Table(name = "account")
 public class Account {
 
     @Id
